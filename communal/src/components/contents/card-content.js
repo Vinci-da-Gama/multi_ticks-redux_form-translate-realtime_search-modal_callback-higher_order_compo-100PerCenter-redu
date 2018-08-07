@@ -22,7 +22,12 @@ class CardContent extends Component {
                         {this.props.item.description}
                     </p>
                 </div>
-                <ModalContainer dialogClass={this.state.modalClass} itemDetails={this.props.item} isShowModal={this.state.isActivated} toggleModal={() => { this.setState((prevState) => ({ isActivated: !prevState.isActivated })) }} />
+                <ModalContainer 
+                    dialogClass={this.state.modalClass} 
+                    itemDetails={this.props.item} 
+                    isShowModal={this.state.isActivated} 
+                    toggleModal={() => { this.setState((prevState) => ({ isActivated: !prevState.isActivated })) }} 
+                    />
             </div>
         )
     }
