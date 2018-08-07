@@ -1,0 +1,21 @@
+{
+    "presets": ["env", "react", "stage-3"],
+    "plugins": [
+        [
+            "transform-runtime", {
+                "polyfill": true,
+                "regenerator": true
+            }
+        ]
+    ],
+    "env": {
+        "production": {
+            "presets": [
+                ["env", {
+                    "modules": false,
+                    "useBuiltIns": true
+                }], "stage-3"
+            ]
+        }
+    }
+}
