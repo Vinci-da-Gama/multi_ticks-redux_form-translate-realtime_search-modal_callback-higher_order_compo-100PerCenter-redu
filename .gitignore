@@ -9,3 +9,6 @@ _asserts/dist/
 npm-debug.log
 *.txt
 tmp.*
+.babelrc
+webpack.config.babel.js
+_asserts/
