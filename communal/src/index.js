@@ -1,6 +1,6 @@
 require('../style/index.scss');
 
-import 'babel-polyfill';
+// import 'babel-polyfill';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import React from 'react';

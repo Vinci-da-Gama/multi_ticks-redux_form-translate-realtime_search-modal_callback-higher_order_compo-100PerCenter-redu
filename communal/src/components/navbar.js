@@ -6,6 +6,8 @@ import {
 } from 'reactstrap';
 import { NavLink as RRNavLink } from 'react-router-dom';
 
+import brandImg from '../../img/brand.png';
+
 class AppNavBarCompo extends Component {
     constructor(props) {
         super(props);
@@ -22,7 +24,7 @@ class AppNavBarCompo extends Component {
         return (
             <Navbar color="light" light expand="md">
                 <NavbarBrand to="/" activeClassName="active" tag={RRNavLink} exact>
-                    <img src="./img/brand.png" className="brand-navbar" alt="brand..." />
+                    <img src={brandImg} className="brand-navbar" alt="brand..." />
                     Show_Case
                 </NavbarBrand>
                 <NavbarToggler onClick={() => this.toggle()} />

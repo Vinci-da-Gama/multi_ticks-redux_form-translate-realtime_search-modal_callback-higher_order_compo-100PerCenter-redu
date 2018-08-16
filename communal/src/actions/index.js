@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { FETCH_INEBRIANT, FETCH_HEALTH, FETCH_PASTRY, FETCH_DAIRY, FETCH_FRESH, FETCH_COSMETIC, FETCH_CRAFTS } from '../types';
+import { FETCH_INEBRIANT, FETCH_HEALTH, FETCH_PASTRY, FETCH_DAIRY, 
+	FETCH_FRESH, FETCH_COSMETIC, FETCH_CRAFTS, FETCH_MISS_CHILDREN, FETCH_PROPVAL_OBJ } from '../types';
 import { handleError, handleNoData } from '../helpers/error-handler';
 const rootUrl = 'http://localhost:3004';
 
@@ -26,3 +27,63 @@ export const grabInebriants = () => {
 			});
 	};
 };
+
+export const grabMissChildren = () => {
+	const missChildren = [
+		{
+			value: 'Miss1',
+			children: [
+				{ value: 'Miss2' },
+				{ value: 'Hit1', children: [ { value: 'Miss3' } ] }
+			]
+		},
+		{
+			value: 'Miss4',
+			children: [
+				{ value: 'Miss5' },
+				{ value: 'Miss6', children: [ { value: 'Hit2' } ] }
+			]
+		},
+		{
+			value: 'Miss7',
+			children: [
+				{ value: 'Miss8' },
+				{ value: 'Miss9', children: [ { value: 'Miss10' } ] }
+			]
+		},
+		{
+			value: 'Hit3',
+			children: [
+				{ value: 'Miss11' },
+				{ value: 'Miss12', children: [ { value: 'Miss13' } ] }
+			]
+		},
+		{
+			value: 'Miss14',
+			children: [
+				{ value: 'Hit4' },
+				{ value: 'Miss15', children: [ { value: 'Miss16' } ] }
+			]
+		},
+	];
+	return {
+		type: FETCH_MISS_CHILDREN,
+		missChildren
+	};
+};
+
+export const getObjForPropValue = (propValObj) =>  {
+	const data = {
+		item: {
+			photo: {
+				file: {},
+				progress: 20
+			}
+		}
+	};
+	return {
+		type: FETCH_PROPVAL_OBJ,
+		propvalObj: propValObj? propValObj : data
+	};
+};
+

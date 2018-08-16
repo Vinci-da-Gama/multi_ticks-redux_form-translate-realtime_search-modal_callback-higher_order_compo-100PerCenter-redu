@@ -55,4 +55,51 @@ body.basictorso {
 	}
 }
 
+.bgcgreen {
+	background-color: green;
+}
+
+.bgc-img {
+	height: 300px;
+	background: transparent url(./cssimg/pd.jpg) center center no-repeat;
+	background-size: cover;
+}
+
+.half-container {
+	border: 1px solid red;
+	width: 100%;
+	margin: 0 0 0 auto;
+}
+
+@media all and (min-width: 1201px) {
+	.half-container {
+		max-width: 540px;
+	}
+}
+
+@media all and (max-width: 1200px) {
+	.half-container {
+		max-width: 452px;
+	}
+}
+
+@media all and (max-width: 992px) {
+	.half-container {
+		max-width: 330px;
+	}
+}
+
+@media all and (max-width: 768px) {
+	.half-container {
+		max-width: 240px;
+	}
+}
+
+@media all and (max-width: 576px) {
+	.half-container {
+		max-width: 100%;
+		margin: 0;
+	}
+}
+
 @import "./_general/mq.scss";

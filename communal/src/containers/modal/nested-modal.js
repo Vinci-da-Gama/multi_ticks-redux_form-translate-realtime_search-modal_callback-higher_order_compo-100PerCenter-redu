@@ -11,7 +11,8 @@ class NestedModalContainer extends Component {
     render () {
         return (
             <div>
-                <Modal isOpen={this.props.isShowFirstModal} toggle={this.props.toggleFirstModal} className={this.props.dialogModalClasses}>
+                <Modal isOpen={this.props.isShowFirstModal} toggle={this.props.toggleFirstModal} 
+                    className={this.props.dialogModalClasses} onClosed={() => alert('This is closed callback.')}>
                     <ModalHeader toggle={this.props.toggleFirstModal}>
                         First_Modal
                     </ModalHeader>

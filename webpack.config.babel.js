@@ -4,14 +4,23 @@ import WriteFilePlugin    from 'write-file-webpack-plugin';
 import UglifyJsPlugin     from 'uglifyjs-webpack-plugin';
 import ExtractTextPlugin  from 'extract-text-webpack-plugin';
 import CleanWebpackPlugin from 'clean-webpack-plugin';
+import HtmlWebpackPlugin  from 'html-webpack-plugin';
+// faviconWebpackPlugin is for application, donot use it for website.
+// import FavcWpkPlugin      from 'favicons-webpack-plugin';
 import wpkMerge           from 'webpack-merge';
 
+
 const ast = './_asserts', distDir = `${ast}/dist`, 
-    communal = './communal', devSrc = `${communal}/src/`, 
-    sassLane = `${communal}/style`;
+    communal = './communal', devSrc = `${communal}/src/`;
 const entryIdx = `${devSrc}index.js`;
 const npmLifecycle = process.env.npm_lifecycle_event;
 console.log('14 -- npmLifecycle: ', npmLifecycle);
+const isProduction = npmLifecycle === 'build:prod';
+
+const extractSCSS = new ExtractTextPlugin({
+    filename: '[name].css',
+    allChunks: true
+});
 
 const pathsToClean = [
     `${distDir}/js/`,
@@ -22,8 +31,6 @@ const pathsToClean = [
 const cleanOptions = {
     watch: true
 };
-
-const isProduction = npmLifecycle === 'build:prod';
 
 const commonConfig = {
     // for development.
@@ -63,6 +70,22 @@ const commonConfig = {
                         }
                     ]
                 })
+            },
+            {
+                test: /\.(jpe?g$|gif|png)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            limit: 10000,
+                            fallback: 'file-loader',
+                            name: '[name].[ext]',
+                            useRelativePath: true
+                            // publicPath: `${ast}`,
+                            // outputPath: `./img`
+                        }
+                    }
+                ]
             }
         ]
     },
@@ -70,6 +93,37 @@ const commonConfig = {
         extensions: ['.js', '.jsx', '.css', '.scss', 'less']
     },
     plugins: [
+        /* new FavcWpkPlugin({
+            logo: nPath.resolve(__dirname, `${communal}/img/favicon.ico`),
+            emitStats: false,
+            prefix: '../dist/icons-[hash:5]/',
+            // persistentCache: true,
+            inject: true, // inject into HtmlWebpackPlugin, when favicon is not used in HtmlWebpackPlugin.
+            background: '#7ec0ee',
+            // title: 'only use it when it is not html(native code), thus no title tag',
+            icons: {
+                android: true,
+                appleIcon: true,
+                appleStartup: true,
+                coast: false,
+                favicons: true,
+                firefox: true,
+                opengraph: false,
+                twitter: false,
+                yandex: false,
+                windows: false
+            }
+        }), */
+        new HtmlWebpackPlugin({
+            title: 'Test_ShowCase',
+            template : nPath.resolve(__dirname, `${communal}/index.html`),
+            filename: '../index.html',
+            // when it is website, then use favicon here, due to it only requires one favicon.
+            favicon: __dirname + '/communal/img/favicon.ico',
+            // js and css insertd into template already, do inject again, otherwise, it cause use babel-polyfill twice.
+            inject: false,
+            minify: true
+        }),
         new CleanWebpackPlugin(pathsToClean, cleanOptions),
         new wpk.HotModuleReplacementPlugin(),
         new wpk.optimize.OccurrenceOrderPlugin(),
@@ -78,17 +132,16 @@ const commonConfig = {
         }),
         /*when you use webpack-dev-server and you also want to output bundle.js*/
         new WriteFilePlugin(),
-        new ExtractTextPlugin('css/[name].css', {
-            allChunks: true
-        })
+        extractSCSS
     ],
     devServer: {
         historyApiFallback: true,
-        contentBase: nPath.join(__dirname, `${ast}`),
-        publicPath: `${distDir}`,
+        contentBase: nPath.resolve(__dirname, `${ast}`),
+        publicPath: `${ast}`,
         stats: {
             colors: true,
-            timings: true
+            timings: true,
+            cached: false
         },
         quiet: false,
         noInfo: false
@@ -114,11 +167,11 @@ let wpkConfig;
 // Detect how npm is run and branch based on that
 switch(npmLifecycle) {
     case 'build:dev':
-        console.log('117 -- development configutation...');
+        console.log('140 -- development configutation...');
         wpkConfig = wpkMerge(commonConfig, {});
         break;
     default:
-        console.log('121 -- default wpk configutation...');
+        console.log('144 -- default wpk configutation...');
         wpkConfig = wpkMerge(commonConfig, {});
         break;
 }
