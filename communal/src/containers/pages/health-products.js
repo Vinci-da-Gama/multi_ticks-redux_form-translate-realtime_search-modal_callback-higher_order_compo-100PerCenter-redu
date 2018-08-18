@@ -183,13 +183,12 @@ class HealthProductsCompo extends Component {
 	}
 
 	grabInsFrom2To9() {
-		const range = function(start_num, end_num)
-		{
-			if (end_num - start_num === 2) {
-				return [start_num + 1];
+		const range = function(startNum, endNum) {
+			if (endNum - startNum === 2) {
+				return [startNum + 1];
 			} else {
-				const list = range(start_num, end_num - 1);
-				list.push(end_num - 1);
+				const list = range(startNum, endNum - 1);
+				list.push(endNum - 1);
 				return list;
 			}
 		};
