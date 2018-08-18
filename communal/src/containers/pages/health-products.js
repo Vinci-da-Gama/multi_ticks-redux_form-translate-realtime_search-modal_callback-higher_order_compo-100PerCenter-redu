@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import _ from 'lodash';
+// import _ from 'lodash';
 import { connect } from 'react-redux';
 
 import NestedModalContainer from '../modal/nested-modal';
@@ -29,7 +29,7 @@ class HealthProductsCompo extends Component {
 	}
 
 	handleCheckboxSelection(e) {
-		const name = e.target.name;
+		const name = { ...e.target.name };
 		const relayObj = Object.keys(
 			this.state.checkboxes
 		).reduce((tmpObj, currentItem) => {
@@ -79,7 +79,7 @@ class HealthProductsCompo extends Component {
 			if (val === 0) {
 				return 1;
 			}
-			return val * recursion5To1(val-1);
+			return val * recursion5To1(val - 1);
 		}
 		return recursion5To1(5);
 	}
@@ -91,13 +91,15 @@ class HealthProductsCompo extends Component {
 				name: 'name5',
 				children: [
 					{
-						age: 3, name: 'name6',
+						age: 3,
+						name: 'name6',
 						children: [
 							{ age: 2, name: 'name33' }
 						]
 					},
 					{
-						age: 8, name: 'name7',
+						age: 8,
+						name: 'name7',
 						children: [
 							{ age: 1, name: 'name20' }
 						]
@@ -109,13 +111,15 @@ class HealthProductsCompo extends Component {
 				name: 'name9',
 				children: [
 					{
-						age: 2, name: 'name10',
+						age: 2,
+						name: 'name10',
 						children: [
 							{ age: 7, name: 'name19' }
 						]
 					},
 					{
-						age: 6, name: 'name11',
+						age: 6,
+						name: 'name11',
 						children: [
 							{ age: 1, name: 'name18' }
 						]
@@ -124,12 +128,22 @@ class HealthProductsCompo extends Component {
 			}
 		];
 
-		let rz = [];
+		const rz = [];
 		const findYoungestChild = (arr) => {
 			for (let i = 0; i < arr.length; i++) {
 				let tmp;
-				for (const key in arr[i]) {
-					if (arr[i].hasOwnProperty(key) && key === 'children') {
+				// for (const key in arr[i]) {
+				// 	if (arr[i].hasOwnProperty(key) && key === 'children') {
+				// 		tmp = findYoungestChild(arr[i].children);
+				// 	} else {
+				// 		rz.push({
+				// 			age: arr[i].age,
+				// 			name: arr[i].name
+				// 		});
+				// 	}
+				// }
+				Object.keys(arr[i]).forEach((key) => {
+					if (key === 'children') {
 						tmp = findYoungestChild(arr[i].children);
 					} else {
 						rz.push({
@@ -137,7 +151,7 @@ class HealthProductsCompo extends Component {
 							name: arr[i].name
 						});
 					}
-				}
+				});
 			}
 		};
 
@@ -147,9 +161,10 @@ class HealthProductsCompo extends Component {
 			if (idx === 0) {
 				return res;
 			} else {
-				if (elem.age === currArr[idx - 1].age && elem.name === currArr[idx - 1].name) {
+				const lElem = currArr[idx - 1];
+				if (elem.age === lElem.age && elem.name === lElem.name) {
 					return res;
-				} else if (elem.age < currArr[idx - 1].age && elem.name !== currArr[idx - 1].name) {
+				} else if (elem.age < lElem.age && elem.name !== lElem.name) {
 					return [...res, elem];
 				} else {
 					return res;
@@ -186,7 +201,7 @@ class HealthProductsCompo extends Component {
 			if (val === 1) {
 				return 1;
 			}
-			let nextAdd = recursivAdd(val-1);
+			const nextAdd = recursivAdd(val - 1);
 			// console.log('191 -- nextAdd: ', nextAdd, ' val: ', val);
 			return val + nextAdd;
 		};
@@ -199,7 +214,7 @@ class HealthProductsCompo extends Component {
 				return 1;
 			} else {
 				exponent = exponent - 1;
-				let nextExponent = exponseOneNumber(num, exponent);
+				const nextExponent = exponseOneNumber(num, exponent);
 				return num * nextExponent;
 			}
 		};
@@ -215,6 +230,7 @@ class HealthProductsCompo extends Component {
 			if (eachObj.children) {
 				return (eachObj.children = eachObj.children.filter(f)).length;
 			}
+			return {};
 		});
 		console.log('202 -- : ', JSON.stringify(resObj, null, 2));
 	}
@@ -239,14 +255,23 @@ class HealthProductsCompo extends Component {
 				return obj;
 			}
 			let tElem = {};
-			for (const key in obj) {
+			/* for (const key in obj) {
 				if (obj.hasOwnProperty(key) && typeof obj[key] === 'object') {
 					tElem = recursionSearchById(obj[key], targetIdVal);
 					if (tElem) {
 						return tElem;
 					}
 				}
-			}
+			} */
+			Object.keys(obj).forEach((key) => {
+				if (typeof obj[key] === 'object') {
+					tElem = recursionSearchById(obj[key], targetIdVal);
+					if (tElem) {
+						return tElem;
+					}
+				}
+				return {};
+			});
 			return tElem;
 		}
 		console.log('235 -- targetObj is: ', recursionSearchById(data, targetIdVal));
