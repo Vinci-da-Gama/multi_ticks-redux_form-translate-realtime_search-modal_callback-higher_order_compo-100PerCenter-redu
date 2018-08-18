@@ -1,4 +1,3 @@
-import React from 'react';
 import { Switch, Route } from 'react-router-dom';
 
 import HomeCompo from '../containers/pages/home';
@@ -23,6 +22,6 @@ const RootRoute = () => (
 		<Route path='/crafts' component={CraftsCompo} />
 		<Route component={NoFoundCompo} />
 	</Switch>
-)
-  
-  export default RootRoute;
+);
+
+export default RootRoute;
