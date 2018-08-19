@@ -8,8 +8,11 @@ export const handleNoData = (disp, ce) => {
 		success: false,
 		responseCode: 0
 	};
+
+	const ThreeThousand = 3000;
+
 	disp(ce(errObj));
 	setTimeout(() => {
 		window.location.reload();
-	}, 3000);
+	}, ThreeThousand);
 };

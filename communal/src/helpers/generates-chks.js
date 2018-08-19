@@ -1,3 +1,5 @@
+import React from 'react';
+
 export const GeneratesCheckboxes = ({ chksState, handleSelect }) => {
 	return Object.keys(chksState).map((elem, idx) => {
 		return (

@@ -5,7 +5,7 @@ class PastryCompo extends Component {
 		return (
 			<div className="row mx-3">Pastry...</div>
 		);
-	};
+	}
 }
 
 export default PastryCompo;

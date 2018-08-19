@@ -3,7 +3,6 @@
     "parser": "babel-eslint",
     "plugins": [
         "react",
-        "jsx-a11y",
         "import"
     ],
     "parserOptions": {
@@ -19,7 +18,8 @@
     "env": {
         "es6":     true,
         "browser": true,
-        "commonjs":true
+        "commonjs":true,
+        "jquery":  true
     },
     "rules": {
         "import/prefer-default-export": "off",
@@ -28,13 +28,13 @@
         "linebreak-style": ["error", "unix"],
         "strict": [ 2, "safe" ],
         "no-debugger": [2],
-        "arrow-body-style": [1],
+        "arrow-body-style": [0],
         "no-tabs": [0],
         "brace-style": [2, "1tbs",
             { "allowSingleLine": true }
         ],        
         "no-trailing-spaces": 2,
-        "class-methods-use-this": [1],
+        "class-methods-use-this": [0],
         "keyword-spacing":    2,
         "space-before-function-paren": [2, "never"],
         "spaced-comment":     [2, "always" ],
@@ -57,13 +57,15 @@
         "no-unneeded-ternary": [1],
         "no-return-assign":   [1],
         "no-else-return":     [1],
-        "no-prototype-builtins": [1],
-        "no-param-reassign"   :[1],
+        "no-prototype-builtins": [0],
+        "no-param-reassign"   :[0],
         "operator-assignment" : [0],
         "no-plusplus"         : [0],
         "no-lonely-if"        : [0],
-        "no-magic-numbers":   1,
-        "max-len":            [2, 90, 4, {"ignoreComments": true}],
+        "no-console"          : "off",
+        "no-magic-numbers":   [0],
+        "arrow-parens":       [0],
+        "max-len":            [2, 110, 4, {"ignoreComments": true}],
         "react/prefer-es6-class": 1
     }
 }
