@@ -15,7 +15,8 @@ class HealthProductsCompo extends Component {
 				chbx1: '',
 				chbx2: '',
 				chbx3: ''
-			},
+            },
+            ut: 'unit_test',
 			firstModal: false,
 			nestedModal: false,
 			closeAll: false,
@@ -26,25 +27,25 @@ class HealthProductsCompo extends Component {
 	componentWillMount() {
 		this.props.grabMissChildren();
 		this.props.getObjForPropValue();
-	}
+    }
 
 	handleCheckboxSelection(e) {
-		const name = { ...e.target.name };
-		const relayObj = Object.keys(
-			this.state.checkboxes
-		).reduce((tmpObj, currentItem) => {
+        console.log('!!!!!32 -- ', e.target);
+		const name = e.target.name;
+        const relayObj = Object.keys(this.state.checkboxes)
+        .reduce((tmpObj, currentItem) => {
 			if (currentItem === name) {
 				tmpObj[currentItem] = (e.target.value === '') ? name : '';
 			} else if (
-				currentItem !== name && this.state.checkboxes[currentItem] !== ''
-			) {
+                currentItem !== name && this.state.checkboxes[currentItem] !== ''
+            ) {
 				tmpObj[currentItem] = this.state.checkboxes[currentItem];
 			} else {
 				tmpObj[currentItem] = '';
-			}
+            }
 			return tmpObj;
 		}, {});
-		console.log('46 -- relayObj: ', relayObj);
+		console.log('47 -- relayObj: ', relayObj);
 		this.setState({
 			checkboxes: relayObj
 		});
@@ -66,12 +67,20 @@ class HealthProductsCompo extends Component {
 	}
 
 	closeAllModals() {
-		console.log('68 -- 3kai...');
+		console.log('69 -- 3kai...');
 		this.setState({
 			nestedModal: !this.state.nestedModal,
 			closeAll: true
 		});
-	}
+    }
+    
+    getChksFromModal(chksFromModal) {
+        console.log('!!!!!!77 -- ', chksFromModal);
+        this.setState({
+            checkboxes: chksFromModal
+        });
+        console.log('!!!!!!81 -- ', this.state.checkboxes);
+    }
 
 	calculate5To1() {
 		// const arr = Array.from(Array(5).keys(), elem => elem+1).reverse();
@@ -127,6 +136,8 @@ class HealthProductsCompo extends Component {
 				]
 			}
 		];
+        const tapala = {age: 2, name: 'name5'};
+        // includes
 
 		const rz = [];
 		const findYoungestChild = (arr) => {
@@ -146,16 +157,22 @@ class HealthProductsCompo extends Component {
 					if (key === 'children') {
 						tmp = findYoungestChild(arr[i].children);
 					} else {
-						rz.push({
+                        const someObj = {
 							age: arr[i].age,
 							name: arr[i].name
-						});
+                        };
+                        const tabu = rz.indexOf(someObj);
+                        if (rz.indexOf(someObj) === -1) {
+                            rz.push(someObj);
+                        }
 					}
 				});
 			}
 		};
 
-		findYoungestChild(childrenArray);
+        findYoungestChild(childrenArray);
+
+		console.log('171 just get rz -- ', rz);
 
 		const lo = rz.reduce((res, elem, idx, currArr) => {
 			if (idx === 0) {
@@ -170,16 +187,37 @@ class HealthProductsCompo extends Component {
 					return res;
 				}
 			}
-		}, []);
-		console.log('147 ha -- ', lo);
+        }, []);
+
+        const kucao = [2, 1, 3, 1, 5].filter((elem, idx, arr) => {
+            if (idx === 0) {
+                return true;
+            } else if (arr.indexOf(elem) === idx) {
+                if (elem <= arr[idx - 1]) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return false;
+            }
+        });
+
+        console.log('!!! 197 --- ', kucao);
+
+        const kala = Math.min.apply( Math, [2, 1, 3, 1, 5]);
+        console.log('!!! 200 quick way to find min number --- ', kala);
+        
+
+        // it is for value array only, not for obj array.
+        const loo = [...new Set(lo)];
+		console.log('186 ha -- ', loo);
 
 		rz.sort((a, b) => {
 			// console.log('a is: ', a, 'b is: ', b);
 			return a.age - b.age;
 		});
-
-		console.log('148 use sort to find the youngest child -- ', rz);
-		console.log('159 -- ', rz);
+		console.log('211 after sort rz is: -- ', rz);
 	}
 
 	grabInsFrom2To9() {
@@ -231,7 +269,7 @@ class HealthProductsCompo extends Component {
 			}
 			return {};
 		});
-		console.log('202 -- : ', JSON.stringify(resObj, null, 2));
+		// console.log('241 -- : ', JSON.stringify(resObj, null, 2));
 	}
 
 	searchByIdInNestedObj() {
@@ -273,7 +311,7 @@ class HealthProductsCompo extends Component {
 			});
 			return tElem;
 		}
-		console.log('235 -- targetObj is: ', recursionSearchById(data, targetIdVal));
+		console.log('283 -- targetObj is: ', recursionSearchById(data, targetIdVal));
 	}
 
 	getPropVal() {
@@ -378,16 +416,26 @@ class HealthProductsCompo extends Component {
 					2. high Order Component show other component<br />
 					3. realtime search, reselect and redux-form<br />
 					4. translation<br />
-					5. test<br />
-					6.  recursion (Yes)<br />
-					7. route to dispath and fetch data.
+					5. {this.state.ut.toUpperCase()}<br />
+					6. recursion (Yes)<br />
+					7. route to dispath and fetch data.<br />
+                    <div className="inline-checkbox">
+                        <input id="target-sample-checkbox" type="checkbox" />
+                        <label htmlFor="target-sample-checkbox" className="checker">
+                            Sample image Checkbox
+                        </label>
+                    </div>
+                    <div>
+                        <input id="checkbox3" className="checkbox3imgstyle" type="checkbox" name="checkbox" value="3" />
+                        <label htmlFor="checkbox3">
+                            Option_3_another_sample
+                        </label>
+                    </div>
 				</div>
 				<div className="col-12 col-sm-6 col-lg-3">
 					<ul className="list-group">
 						<GeneratesCheckboxes chksState={this.state.checkboxes}
-							handleSelect={
-								(evt) => { return this.handleCheckboxSelection(evt); }
-							} />
+							handleSelect={(evt) => { this.handleCheckboxSelection(evt); }} />
 						<li className="list-group-item">
 							<button type="button" className="btn btn-primary"
 								onClick={() => this.toggleFirstModal()}>
@@ -396,6 +444,19 @@ class HealthProductsCompo extends Component {
 						</li>
 					</ul>
 				</div>
+				<NestedModalContainer
+					isShowFirstModal={this.state.firstModal}
+					isShowNestedModal={this.state.nestedModal}
+					isCloseAllModal={this.state.closeAll}
+					toggleFirstModal = {() => this.toggleFirstModal()}
+					toggleNestedModal = {() => this.toggleNestedModal()}
+					closeAllModals = {() => this.closeAllModals()}
+					dialogModalClasses = {this.state.modalClass}
+					chkContext = {this.state.checkboxes}
+                    returnNewChksState = {(newChksFromModal = {}) => this.getChksFromModal(newChksFromModal)}
+					handleChkboxSelection = {
+						(evt) => { this.handleCheckboxSelection(evt); }
+					} />
 				<div className="col-12 col-sm-6 col-lg-3">
 					<ul className="list-group">
 						<li className="list-group-item bg-secondary text-white">
@@ -472,18 +533,6 @@ class HealthProductsCompo extends Component {
 						</li> */}
 					</ul>
 				</div>
-				<NestedModalContainer
-					isShowFirstModal={this.state.firstModal}
-					isShowNestedModal={this.state.nestedModal}
-					isCloseAllModal={this.state.closeAll}
-					toggleFirstModal = {() => this.toggleFirstModal()}
-					toggleNestedModal = {() => this.toggleNestedModal()}
-					closeAllModals = {() => this.closeAllModals()}
-					dialogModalClasses = {this.state.modalClass}
-					chkContext = {this.state.checkboxes}
-					handleChkboxSelection = {
-						(evt) => { return this.handleCheckboxSelection(evt); }
-					} />
 				<div className="centered border border-danger">
                     Health Products... This postion is absolute center in browser
 				</div>

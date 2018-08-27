@@ -13,13 +13,17 @@ class NestedModalContainer extends Component {
 				<Modal isOpen={this.props.isShowFirstModal}
 					toggle={this.props.toggleFirstModal}
 					className={this.props.dialogModalClasses}
-					onClosed={() => alert('This is closed callback.')}>
+					onClosed={() => {
+                        console.log('!!!!!!~~~17: ', this.props.chkContext);
+                        this.props.returnNewChksState(this.props.chkContext);
+                    }}>
 					<ModalHeader toggle={this.props.toggleFirstModal}>
 						First_Modal
 					</ModalHeader>
 					<ModalBody>
 						<GeneratesCheckboxes chksState={this.props.chkContext}
 							handleSelect={(evt) => {
+                                console.log('!!!!!26 -- ', evt);
 								this.props.handleChkboxSelection(evt);
 							}} />
 						<br />
@@ -28,7 +32,7 @@ class NestedModalContainer extends Component {
 						</Button>
 						<Modal isOpen={this.props.isShowNestedModal}
 							toggle={this.props.toggleNestedModal}
-							onClosed={this.props.isCloseAllModal ? this.props.toggleFirstModal : null}>
+							onClosed={this.props.isCloseAllModal ? this.props.toggleFirstModal : undefined}>
 							<ModalHeader>
 								Nested Title
 							</ModalHeader>

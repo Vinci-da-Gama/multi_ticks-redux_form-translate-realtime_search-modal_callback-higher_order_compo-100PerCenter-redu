@@ -9,6 +9,8 @@ import DairyProductsCompo from '../containers/pages/dairy-products';
 import FreshCompo from '../containers/pages/fresh';
 import CosmeticCompo from '../containers/pages/cosmetic';
 import CraftsCompo from '../containers/pages/crafts';
+import NestedDecisionCounter from '../containers/pages/nestedDecisionCounter';
+import NestedBooksByParamsCompo from '../containers/pages/nestedByParams';
 import NoFoundCompo from '../containers/pages/NoFound';
 
 const RootRoute = () => (
@@ -21,6 +23,8 @@ const RootRoute = () => (
 		<Route path='/fresh' component={FreshCompo} />
 		<Route path='/cosmetic' component={CosmeticCompo} />
 		<Route path='/crafts' component={CraftsCompo} />
+		<Route path='/nestedInDecisionNCounter' component={NestedDecisionCounter} />
+        <Route path="/nestedBooksByParams" component={NestedBooksByParamsCompo} />
 		<Route component={NoFoundCompo} />
 	</Switch>
 );

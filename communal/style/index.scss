@@ -1,5 +1,6 @@
-@import "./_general/mixins.scss";
-@import "./_general/variables.scss";
+@import 'node_modules/bootstrap/scss/bootstrap';
+@import "./_general/mixins";
+@import "./_general/variables";
 @import "./compos/loader";
 
 body.basictorso {
@@ -70,6 +71,49 @@ body.basictorso {
 	width: 100%;
 	margin: 0 0 0 auto;
 }
+
+.inline-checkbox {
+    display: inline-block;
+}
+
+#target-sample-checkbox {
+    opacity: 0;
+}
+.checker {
+    background-image: url(./cssimg/chbs.png);
+    background-position: left center;
+    background-size: auto 100%;
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+}
+#target-sample-checkbox:checked + .checker {
+    background-position: right center;
+}
+
+
+
+
+input.checkbox3imgstyle:not(old) {
+    width   : 28px;
+    margin  : 0;
+    padding : 0;
+    opacity : 0;
+}
+
+input.checkbox3imgstyle:not(old) + label {
+    display      : inline-block;
+    margin-left  : -28px;
+    padding-left : 28px;
+    background   : transparent url(./cssimg/checks.png) no-repeat 0 0;
+    line-height  : 24px;
+}
+
+input.checkbox3imgstyle:not(old):checked + label {
+    background-position : 0 -24px;
+}
+
+
 
 @media all and (min-width: 1201px) {
 	.half-container {

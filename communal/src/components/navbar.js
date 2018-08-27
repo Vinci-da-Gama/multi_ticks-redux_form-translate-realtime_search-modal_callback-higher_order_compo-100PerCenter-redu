@@ -4,6 +4,7 @@ import {
 	Nav, NavItem, NavLink, UncontrolledDropdown, DropdownToggle,
 	DropdownMenu, DropdownItem
 } from 'reactstrap';
+// if u need activeClassName attr, thus import NavLink as RRNavLink.
 import { NavLink as RRNavLink } from 'react-router-dom';
 
 import brandImg from '../../img/brand.png';
@@ -79,6 +80,16 @@ class AppNavBarCompo extends Component {
 						<NavItem>
 							<NavLink to="/crafts" activeClassName="active" tag={RRNavLink}>
 								Crafts
+							</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink to="/nestedInDecisionNCounter" activeClassName="active" tag={RRNavLink}>
+								InDecision_And_Counter
+							</NavLink>
+						</NavItem>
+						<NavItem>
+							<NavLink to="/nestedBooksByParams" activeClassName="active" tag={RRNavLink}>
+								Books_With_Params_Id
 							</NavLink>
 						</NavItem>
 					</Nav>

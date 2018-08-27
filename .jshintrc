@@ -1,6 +1,7 @@
 {
     "esversion": 6,
     "maxerr": 200,
+    "maxdepth": 5,
     "node": false,
     "jquery": true,
     "devel": true,
@@ -16,5 +17,7 @@
     "noempty": true,
     "trailing": true,
     "browser": true,
-    "strict": true
+    "strict": true,
+    "maxdepth": 6,
+    "maxlen": 90
 }
