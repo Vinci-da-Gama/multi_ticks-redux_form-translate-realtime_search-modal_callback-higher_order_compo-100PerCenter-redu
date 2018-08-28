@@ -1,7 +1,6 @@
 import React from 'react';
 
 const ResourceCompo = ({book, match}) => {
-    console.log('4 -- props: ', book.resources, match.params);
     const resource = book.resources.find((elem) => elem.id === match.params.resourceId);
 	return (
         <div className="card">

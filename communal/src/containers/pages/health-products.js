@@ -172,7 +172,7 @@ class HealthProductsCompo extends Component {
 
         findYoungestChild(childrenArray);
 
-		console.log('171 just get rz -- ', rz);
+		console.log('175 just get rz -- ', rz);
 
 		const lo = rz.reduce((res, elem, idx, currArr) => {
 			if (idx === 0) {
@@ -188,6 +188,7 @@ class HealthProductsCompo extends Component {
 				}
 			}
         }, []);
+        console.log('191 !! lo: ', lo);
 
         const kucao = [2, 1, 3, 1, 5].filter((elem, idx, arr) => {
             if (idx === 0) {
@@ -203,21 +204,39 @@ class HealthProductsCompo extends Component {
             }
         });
 
-        console.log('!!! 197 --- ', kucao);
+        console.log('!!! 207 --- ', kucao);
 
         const kala = Math.min.apply( Math, [2, 1, 3, 1, 5]);
-        console.log('!!! 200 quick way to find min number --- ', kala);
-        
+        console.log('!!! 210 quick way to find min number --- ', kala);
+
+        const dupObj = [{ id: 1, value: 'a' }, { id: 2, value: 'b' }, { id: 1, value: 'c' }];
+        const uniKeys = [...(new Set(dupObj.map(({ id }) => id)))];
+        console.log('214 !!! uniKeys: ', uniKeys);
 
         // it is for value array only, not for obj array.
         const loo = [...new Set(lo)];
-		console.log('186 ha -- ', loo);
+        console.log('229 ha -- set is applied, but nothing changed, it is only for value array', loo);
+        
 
-		rz.sort((a, b) => {
-			// console.log('a is: ', a, 'b is: ', b);
+		lo.sort((a, b) => {
+            // console.log('a is: ', a, 'b is: ', b);
 			return a.age - b.age;
 		});
-		console.log('211 after sort rz is: -- ', rz);
+        console.log('236 after sort rz is: -- ', lo);
+        
+        const theYoungest = lo.filter(({age}, idx, currArr) => {
+            // this is no good, although it works.
+            if ( idx === 0 ) {
+                return true;
+            } else if (idx < 2 && currArr[ idx - 1 ] && age <= currArr[ idx - 1 ].age) {
+                return true;
+            } else if (idx >= 2 && currArr[ idx - 1 ] && age <= currArr[ idx - 1 ].age && age <= currArr[ idx - 2 ].age) {
+                return true;
+            } else {
+                return false;
+            }
+        });
+        console.log('247 -- ', theYoungest);
 	}
 
 	grabInsFrom2To9() {

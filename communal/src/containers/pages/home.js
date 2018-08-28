@@ -1,5 +1,4 @@
 import React from 'react';
-
 const { Component } = React;
 
 class HomeCompo extends Component {

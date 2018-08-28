@@ -113,6 +113,12 @@ input.checkbox3imgstyle:not(old):checked + label {
     background-position : 0 -24px;
 }
 
+.hover-darker {
+    > li:hover {
+        background-color: gray;
+        color: #fff;
+    }
+}
 
 
 @media all and (min-width: 1201px) {

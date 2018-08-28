@@ -6,7 +6,7 @@ import ResourceCompo from './resource';
 
 export default ({books, match}) =>  {
     const targetBook = books.find(({id}) => id === match.params.bookId);
-    console.log('8 -- target book: ', targetBook);
+    console.log('9 -- target book: ', targetBook);
     if (books.length === 0 || !targetBook) {
         return (
             <div>
