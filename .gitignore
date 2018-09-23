@@ -12,3 +12,6 @@ tmp.*
 .babelrc
 webpack.config.babel.js
 _asserts/
+.babelrc
+postcss.config.js
+webpack.config.babel.js
